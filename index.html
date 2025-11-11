@@ -58,10 +58,11 @@
             <div class="flex flex-col md:flex-row items-center mb-4 md:mb-0">
                 <!-- JAGORON Text -->
                 <div class="text-3xl font-extrabold text-indigo-600 tracking-wider mb-2 md:mb-0 md:mr-6">
-                    <a href="index.html">JAGORON</a>
+                    <!-- Updated: Link to Home page URL -->
+                    <a href="https://vdoadtr.github.io/JAGORON-Home/">JAGORON</a>
                 </div>
                 <!-- Home Button (Standard) -->
-                <a href="index.html" id="homeButton" 
+                <a href="https://vdoadtr.github.io/JAGORON-Home/" id="homeButton" 
                    class="nav-button px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">
                     Home
                 </a>
@@ -69,9 +70,12 @@
             
             <!-- Right Group: Nav Links (About, Contact, Address, Ticket) -->
             <nav class="flex flex-wrap justify-center space-x-2 md:space-x-4 font-semibold">
-                <a href="about.html" class="nav-button p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">About</a>
-                <a href="contact.html" class="nav-button p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">Contact</a>
-                <a href="address.html" class="nav-button p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">Address</a>
+                <!-- Updated: Link to About page URL -->
+                <a href="https://vdoadtr.github.io/JAGORON-About/" class="nav-button p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">About</a>
+                <!-- Updated: Link to Contact page URL -->
+                <a href="https://vdoadtr.github.io/JAGORON-Contact/" class="nav-button p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">Contact</a>
+                <!-- Updated: Link to Address page URL -->
+                <a href="https://vdoadtr.github.io/JAGORON-Address/" class="nav-button p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">Address</a>
                 <!-- TickeT button (Highlighted/Active) -->
                 <button id="navTicketButton" 
                     class="nav-button nav-active px-4 py-2 rounded-lg transition duration-300 shadow-sm border border-gray-200"
@@ -187,7 +191,8 @@
 
     <script>
         // --- Configuration & Initialization ---
-        const TICKET_LINK_EXTERNAL = "https://external.ticketing.partner.com/jagoron2026"; 
+        // Updated: Using the external link provided by the user for the Ticket page
+        const TICKET_LINK_EXTERNAL = "https://vdoadtr.github.io/JAGORON-Ticket/"; // Note: Reusing the link here, though the structure assumes an external partner link normally.
 
         // --- Firebase/Auth Setup (Mandatory in this environment) ---
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
@@ -206,7 +211,8 @@
         // --- Interaction Logic: Main Ticket Button Handler ---
         function handleTicketClick() {
             // Since this is the active page, the navigation button doesn't need to link anywhere else.
-            // If it were in another page, it would link to ticket.html
+            // But if we want it to reload the page or navigate to the ticket page URL:
+            window.location.href = "https://vdoadtr.github.io/JAGORON-Ticket/";
         }
         
         let currentTicketType = ''; // To store which ticket was selected
@@ -232,9 +238,9 @@
         function confirmRedirect() {
             closeModal();
             // Redirect the user to the external ticketing link
-            // In a real scenario, this link might be customized based on `currentTicketType`
+            // Using window.location.href instead of window.open(..., '_blank') to keep it in the same tab as requested.
             console.log(`Redirecting user for: ${currentTicketType} to ${TICKET_LINK_EXTERNAL}`);
-            window.open(TICKET_LINK_EXTERNAL, '_blank'); 
+            window.location.href = TICKET_LINK_EXTERNAL; 
         }
 
     </script>

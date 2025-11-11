@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAGORON - Book Your Tickets</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN for Ticket Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+        }
+        .nav-button:hover {
+            color: #4f46e5;
+            background-color: #eef2ff;
+        }
+        /* Highlight style for active navigation links */
+        .nav-active {
+            background-color: #4f46e5; /* indigo-600 */
+            color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .nav-active:hover {
+            background-color: #4338ca; /* indigo-700 */
+            color: #ffffff;
+        }
+        .ticket-card {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .ticket-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.1s;
+        }
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div id="app" class="container mx-auto p-4 md:p-8">
+
+        <!-- Navigation Bar (Identical to others, but 'Ticket' is active) -->
+        <header class="flex flex-col md:flex-row justify-between items-center bg-white p-4 md:p-6 rounded-xl shadow-lg mb-12 sticky top-0 z-50">
+            
+            <!-- Left Group: JAGORON and Home -->
+            <div class="flex flex-col md:flex-row items-center mb-4 md:mb-0">
+                <!-- JAGORON Text -->
+                <div class="text-3xl font-extrabold text-indigo-600 tracking-wider mb-2 md:mb-0 md:mr-6">
+                    <a href="index.html">JAGORON</a>
+                </div>
+                <!-- Home Button (Standard) -->
+                <a href="index.html" id="homeButton" 
+                   class="nav-button px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">
+                    Home
+                </a>
+            </div>
+            
+            <!-- Right Group: Nav Links (About, Contact, Address, Ticket) -->
+            <nav class="flex flex-wrap justify-center space-x-2 md:space-x-4 font-semibold">
+                <a href="about.html" class="nav-button p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">About</a>
+                <a href="contact.html" class="nav-button p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">Contact</a>
+                <a href="address.html" class="nav-button p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300">Address</a>
+                <!-- TickeT button (Highlighted/Active) -->
+                <button id="navTicketButton" 
+                    class="nav-button nav-active px-4 py-2 rounded-lg transition duration-300 shadow-sm border border-gray-200"
+                    onclick="handleTicketClick()">
+                    Ticket
+                </button>
+            </nav>
+        </header>
+
+        <main class="space-y-12">
+
+            <!-- Title Section -->
+            <section class="text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-2">
+                    Purchase Your <span class="text-indigo-600">JAGORON</span> Pass
+                </h1>
+                <p class="text-xl text-gray-500">Choose the perfect way to experience the festival.</p>
+            </section>
+
+            <!-- Ticket Options Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- 1. Single Day Pass -->
+                <div class="ticket-card text-center flex flex-col justify-between">
+                    <div class="mb-6">
+                        <i data-lucide="sun" class="w-10 h-10 text-yellow-500 mx-auto mb-4"></i>
+                        <h2 class="text-2xl font-bold text-gray-700 mb-2">Single Day Pass</h2>
+                        <p class="text-gray-500">Access for any one day of the festival.</p>
+                        <p class="text-4xl font-extrabold text-indigo-600 mt-4">₹ 499</p>
+                        <p class="text-sm text-gray-400 mt-1">Per Person / Per Day</p>
+                    </div>
+                    <ul class="text-left space-y-2 text-gray-600 mb-6 flex-grow">
+                        <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i> General Entry for 1 Day</li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i> Access to Main Stages</li>
+                        <li class="flex items-start"><i data-lucide="x" class="w-5 h-5 text-red-400 mr-2 flex-shrink-0"></i> No Premium Seating</li>
+                    </ul>
+                    <button onclick="bookTicket('Single Day Pass')"
+                        class="cta-button w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 shadow-lg">
+                        Buy Now
+                    </button>
+                </div>
+
+                <!-- 2. Full Festival Pass (Recommended) -->
+                <div class="ticket-card text-center flex flex-col justify-between border-4 border-indigo-600 scale-105">
+                    <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold py-1 px-3 rounded-bl-lg rounded-tr-lg">BEST VALUE</span>
+                    <div class="mb-6">
+                        <i data-lucide="sparkles" class="w-10 h-10 text-pink-500 mx-auto mb-4"></i>
+                        <h2 class="text-2xl font-bold text-gray-700 mb-2">Full Festival Pass</h2>
+                        <p class="text-gray-500">Experience all 5 days of JAGORON 2026.</p>
+                        <p class="text-4xl font-extrabold text-red-500 mt-4">₹ 1,999</p>
+                        <p class="text-sm text-gray-400 mt-1">Limited Time Offer</p>
+                    </div>
+                    <ul class="text-left space-y-2 text-gray-600 mb-6 flex-grow">
+                        <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i> Access for All 5 Days</li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i> Free Event Souvenir</li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i> Priority Entry Lane</li>
+                    </ul>
+                    <button onclick="bookTicket('Full Festival Pass')"
+                        class="cta-button w-full bg-red-600 text-white font-bold py-4 rounded-lg hover:bg-red-700 shadow-xl">
+                        BOOK NOW!
+                    </button>
+                </div>
+
+                <!-- 3. VIP Premium Pass -->
+                <div class="ticket-card text-center flex flex-col justify-between">
+                    <div class="mb-6">
+                        <i data-lucide="crown" class="w-10 h-10 text-yellow-600 mx-auto mb-4"></i>
+                        <h2 class="text-2xl font-bold text-gray-700 mb-2">VIP Premium Pass</h2>
+                        <p class="text-gray-500">The ultimate, hassle-free festival experience.</p>
+                        <p class="text-4xl font-extrabold text-indigo-600 mt-4">₹ 4,999</p>
+                        <p class="text-sm text-gray-400 mt-1">Per Person (All Access)</p>
+                    </div>
+                    <ul class="text-left space-y-2 text-gray-600 mb-6 flex-grow">
+                        <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i> All Festival Pass Benefits</li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i> Exclusive VIP Lounge Access</li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"></i> Reserved Premium Seating</li>
+                    </ul>
+                    <button onclick="bookTicket('VIP Premium Pass')"
+                        class="cta-button w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 shadow-lg">
+                        Reserve Pass
+                    </button>
+                </div>
+            </div>
+
+            <!-- Important Notice Section -->
+            <section class="mt-12 p-8 bg-indigo-50 rounded-xl border-l-4 border-indigo-400">
+                <h2 class="text-2xl font-bold text-indigo-700 mb-4 flex items-center">
+                    <i data-lucide="info" class="w-6 h-6 mr-3"></i> Important Note
+                </h2>
+                <p class="text-gray-600 leading-relaxed">
+                    All ticket purchases will be processed securely through our official third-party ticketing partner. Clicking the 'Buy Now' or 'Reserve Pass' button will redirect you to the external booking portal to complete your transaction. Please ensure all details are correct before confirming your booking.
+                </p>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Custom Modal for Booking Redirection Simulation -->
+    <div id="bookingModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center p-4 z-[9999]">
+        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full text-center">
+            <h3 class="text-2xl font-bold text-indigo-600 mb-4">Redirecting...</h3>
+            <p id="modalMessage" class="text-gray-700 mb-6">You are about to be redirected to the booking partner website for the Full Festival Pass.</p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                    Cancel
+                </button>
+                <button onclick="confirmRedirect()" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                    Continue to Booking
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Configuration & Initialization ---
+        const TICKET_LINK_EXTERNAL = "https://external.ticketing.partner.com/jagoron2026"; 
+
+        // --- Firebase/Auth Setup (Mandatory in this environment) ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        // Note: Included for environment compliance.
+
+        // Initialize Lucide Icons
+        window.addEventListener('load', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            // Ensure the ticket button is visible if it's the active page
+            document.getElementById('navTicketButton').classList.add('nav-active');
+        });
+
+        // --- Interaction Logic: Main Ticket Button Handler ---
+        function handleTicketClick() {
+            // Since this is the active page, the navigation button doesn't need to link anywhere else.
+            // If it were in another page, it would link to ticket.html
+        }
+        
+        let currentTicketType = ''; // To store which ticket was selected
+
+        // --- Interaction Logic: Booking Handler ---
+        function bookTicket(ticketType) {
+            currentTicketType = ticketType;
+            const modal = document.getElementById('bookingModal');
+            const message = document.getElementById('modalMessage');
+            
+            message.textContent = `You are about to be redirected to the booking partner website for the ${ticketType}.`;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex'); // Show the modal
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('bookingModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden'); // Hide the modal
+            currentTicketType = '';
+        }
+
+        function confirmRedirect() {
+            closeModal();
+            // Redirect the user to the external ticketing link
+            // In a real scenario, this link might be customized based on `currentTicketType`
+            console.log(`Redirecting user for: ${currentTicketType} to ${TICKET_LINK_EXTERNAL}`);
+            window.open(TICKET_LINK_EXTERNAL, '_blank'); 
+        }
+
+    </script>
+</body>
+</html>
